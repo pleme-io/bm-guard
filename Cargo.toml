@@ -1,0 +1,30 @@
+[package]
+name = "bm-guard"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89.0"
+description = "Pre-execution command guardian — blocks/warns on dangerous commands in interactive shell"
+license = "MIT"
+repository = "https://github.com/pleme-io/bm-guard"
+homepage = "https://github.com/pleme-io/bm-guard"
+
+[[bin]]
+name = "bm-guard"
+path = "src/main.rs"
+
+[dependencies]
+guardrail = { git = "https://github.com/pleme-io/guardrail" }
+hayai = { git = "https://github.com/pleme-io/hayai" }
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+
+[lints.clippy]
+pedantic = "warn"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+strip = true
